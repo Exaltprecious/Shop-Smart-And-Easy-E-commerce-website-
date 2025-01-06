@@ -1,0 +1,11 @@
+app.get('/analytics', (req, res) => {
+  const totalRevenue = orders.reduce((sum, order) => sum + order.totalAmount, 0);
+  const totalOrders = orders.length;
+  const popularProduct = products.sort((a, b) => b.sales - a.sales)[0];
+  
+  res.json({
+    totalRevenue,
+    totalOrders,
+    popularProduct: popularProduct.name,
+  });
+});

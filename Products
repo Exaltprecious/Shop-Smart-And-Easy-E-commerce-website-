@@ -1,0 +1,14 @@
+app.get('/products', (req, res) => {
+  const { category, priceMin, priceMax } = req.query;
+  let filteredProducts = products;
+
+  if (category) {
+    filteredProducts = filteredProducts.filter(product => product.category === category);
+  }
+  if (priceMin || priceMax) {
+    filteredProducts = filteredProducts.filter(product => 
+      product.price >= (priceMin || 0) && product.price <= (priceMax || Infinity)
+    );
+  }
+  res.json(filteredProducts);
+});

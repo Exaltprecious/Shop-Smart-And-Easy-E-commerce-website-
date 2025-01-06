@@ -1,0 +1,13 @@
+let reviews = {}; // Example: { productId: [{ userId, rating, comment }] }
+
+app.post('/reviews', (req, res) => {
+  const { productId, userId, rating, comment } = req.body;
+  reviews[productId] = reviews[productId] || [];
+  reviews[productId].push({ userId, rating, comment });
+  res.status(201).json({ message: 'Review added' });
+});
+
+app.get('/reviews/:productId', (req, res) => {
+  const productId = req.params.productId;
+  res.json(reviews[productId] || []);
+});
